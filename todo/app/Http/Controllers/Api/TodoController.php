@@ -3,21 +3,22 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateTodoRequest;
 use App\Http\Resources\TodoResource;
 use App\Models\Todo;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class TodoController extends Controller
 {
     public function index()
     {
-        return Todo::paginate();
+        $todos = Todo::paginate();
+        return TodoResource::collection($todos);
     }
 
-    public function store(Request $request)
+    public function store(StoreUpdateTodoRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $todo = Todo::create($data);
         // dd($todo);
         return new TodoResource($todo);
@@ -29,10 +30,10 @@ class TodoController extends Controller
         return new TodoResource($todo);
     }
 
-    public function update(Request $request, string $id)
+    public function update(StoreUpdateTodoRequest $request, string $id)
     {
         $todo = Todo::findOrFail($id);
-        $data = $request->all();
+        $data = $request->validated();
         $todo->update($data);
         return new TodoResource($todo);
     }
