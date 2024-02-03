@@ -2,34 +2,34 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\TodoRepositoryInterface;
-use App\Models\Todo;
+use App\Interfaces\CategoryRepositoryInterface;
+use App\Models\Category;
 
-class TodoRepository implements TodoRepositoryInterface
+class CategoryRepository implements CategoryRepositoryInterface
 {
     public function __construct(
-        protected Todo $model,
+        protected Category $model,
     )
     {
         //
     }
-    public function getAllTodos()
+    public function getAllCategories()
     {
         return $this->model->all();
     }
-    public function getTodoById(string $id)
+    public function getCategoryById(string $id)
     {
         return $this->model->findOrFail($id);
     }
-    public function deleteTodo(string $id)
+    public function deleteCategory(string $id)
     {
         return $this->model->findOrFail($id)->delete();
     }
-    public function createTodo(array $values)
+    public function createCategory(array $values)
     {
         return $this->model->create($values);
     }
-    public function updateTodo(string $id, array $values)
+    public function updateCategory(string $id, array $values)
     {
         $todo = $this->model->findOrFail($id);
         $todo->update($values);

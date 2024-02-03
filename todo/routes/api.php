@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\TodoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,11 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('/todos', TodoController::class);
-// Route::delete('/todos/{id}', [TodoController::class, 'destroy']);
-// Route::patch('/todos/{id}', [TodoController::class, 'update']);
-// Route::get('/todos/{id}', [TodoController::class, 'show']);
-// Route::get('/todos', [TodoController::class, 'index']);
-// Route::post('/todos', [TodoController::class, 'store']);
+Route::apiResource('/categories', CategoryController::class);
 
 Route::get('/', function() {
     return response()->json([

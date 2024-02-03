@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdateTodoRequest extends FormRequest
+class StoreUpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,18 +22,10 @@ class StoreUpdateTodoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "description" => [
+            "name" => [
                 'required',
                 'min:3',
                 'max:255',
-            ],
-            "is_complete" => [
-                'required',
-                'boolean',
-            ],
-            "category" => [
-                'nullable',
-                'exists:App\Models\Category,id',
             ],
         ];
     }

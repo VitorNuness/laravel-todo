@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TodoResource extends JsonResource
+class CategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,11 +17,9 @@ class TodoResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "description" => $this->description,
-            "is_complete" => $this->is_complete,
-            "category" => $this->category,
+            "name" => $this->name,
             "created_at" => Carbon::make($this->created_at)->format('Y-m-d'),
             "updated_at" => Carbon::make($this->updated_at)->format('Y-m-d'),
-        ];
+        ];;
     }
 }
