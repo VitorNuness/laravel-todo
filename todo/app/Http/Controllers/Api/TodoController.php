@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateTodoRequest;
 use App\Http\Resources\TodoResource;
 use App\Interfaces\TodoRepositoryInterface;
-use App\Models\Todo;
 use Illuminate\Http\Response;
 
 class TodoController extends Controller

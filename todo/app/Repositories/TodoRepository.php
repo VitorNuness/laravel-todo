@@ -31,6 +31,8 @@ class TodoRepository implements TodoRepositoryInterface
     }
     public function updateTodo(string $id, array $values)
     {
-        return $this->model->findOrFail($id)->update($values);
+        $todo = $this->model->findOrFail($id);
+        $todo->update($values);
+        return $todo;
     }
 }
