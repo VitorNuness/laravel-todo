@@ -28,7 +28,7 @@ class TodoControllerTest extends TestCase
         ];
         $this->post('/todos', $data);
 
-        $response = $this->get('/todos');
+        $response = $this->get('/todos')->dump();
         $response->assertStatus(200)
             ->assertJsonStructure([
                 "data" => [

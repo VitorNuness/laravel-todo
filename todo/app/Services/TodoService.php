@@ -2,8 +2,11 @@
 
 namespace App\Services;
 
+use App\DTO\Todos\CreateTodoDTO;
+use App\DTO\Todos\UpdateTodoDTO;
 use App\Interfaces\TodoRepositoryInterface;
 use App\Interfaces\TodoServiceInterface;
+use stdClass;
 
 class TodoService implements TodoServiceInterface
 {
@@ -24,14 +27,14 @@ class TodoService implements TodoServiceInterface
         return $this->repository->getTodoById($id);
     }
 
-    public function createTodo(array $values)
+    public function createTodo(CreateTodoDTO $values)
     {
         return $this->repository->createTodo($values);
     }
 
-    public function updateTodo(string $id, array $values)
+    public function updateTodo(UpdateTodoDTO $updateDTO)
     {
-        return $this->repository->updateTodo($id, $values);
+        return $this->repository->updateTodo($updateDTO);
     }
 
     public function deleteTodo(string $id)

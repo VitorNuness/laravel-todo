@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\DTO\Todos\CreateTodoDTO;
+use App\DTO\Todos\UpdateTodoDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateTodoRequest;
 use App\Http\Resources\TodoResource;
@@ -11,7 +13,7 @@ use Illuminate\Http\Response;
 class TodoController extends Controller
 {
     public function __construct(
-        private TodoServiceInterface $service,
+        protected TodoServiceInterface $service,
     )
     {}
 
@@ -23,8 +25,9 @@ class TodoController extends Controller
 
     public function store(StoreUpdateTodoRequest $request)
     {
-        $data = $request->validated();
-        $todo = $this->service->createTodo($data);
+        $todo = $this->service->createTodo(
+            CreateTodoDTO::makeFromRequest($request)
+        );
         return new TodoResource($todo);
     }
 
@@ -36,8 +39,9 @@ class TodoController extends Controller
 
     public function update(StoreUpdateTodoRequest $request, string $id)
     {
-        $data = $request->validated();
-        $todo = $this->service->updateTodo($id, $data);
+        $todo = $this->service->updateTodo(
+            UpdateTodoDTO::makeFromRequest($request, $id)
+        );
         return new TodoResource($todo);
     }
 

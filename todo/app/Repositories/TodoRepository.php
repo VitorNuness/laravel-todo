@@ -2,8 +2,11 @@
 
 namespace App\Repositories;
 
+use App\DTO\Todos\CreateTodoDTO;
+use App\DTO\Todos\UpdateTodoDTO;
 use App\Interfaces\TodoRepositoryInterface;
 use App\Models\Todo;
+use stdClass;
 
 class TodoRepository implements TodoRepositoryInterface
 {
@@ -25,14 +28,14 @@ class TodoRepository implements TodoRepositoryInterface
     {
         return $this->model->findOrFail($id)->delete();
     }
-    public function createTodo(array $values)
+    public function createTodo(CreateTodoDTO $values)
     {
-        return $this->model->create($values);
+        return $this->model->create( (array) $values);
     }
-    public function updateTodo(string $id, array $values)
+    public function updateTodo(UpdateTodoDTO $updateDTO)
     {
-        $todo = $this->model->findOrFail($id);
-        $todo->update($values);
+        $todo = $this->model->findOrFail($updateDTO->id);
+        $todo->update((array) $updateDTO);
         return $todo;
     }
 }
