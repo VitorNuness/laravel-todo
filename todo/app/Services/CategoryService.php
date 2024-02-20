@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\DTO\Categories\CreateCategoryDTO;
+use App\DTO\Categories\UpdateCategoryDTO;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Interfaces\CategoryServiceInterface;
 
@@ -24,14 +26,14 @@ class CategoryService implements CategoryServiceInterface
         return $this->repository->getCategoryById($id);
     }
 
-    public function createCategory(array $values)
+    public function createCategory(CreateCategoryDTO $createDTO)
     {
-        return $this->repository->createCategory($values);
+        return $this->repository->createCategory($createDTO);
     }
 
-    public function updateCategory(string $id, array $values)
+    public function updateCategory(UpdateCategoryDTO $updateDTO)
     {
-        return $this->repository->updateCategory($id, $values);
+        return $this->repository->updateCategory($updateDTO);
     }
 
     public function deleteCategory(string $id)

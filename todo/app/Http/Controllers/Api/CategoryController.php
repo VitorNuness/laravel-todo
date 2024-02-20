@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\DTO\Categories\CreateCategoryDTO;
+use App\DTO\Categories\UpdateCategoryDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
@@ -23,8 +25,9 @@ class CategoryController extends Controller
 
     public function store(StoreUpdateCategoryRequest $request)
     {
-        $data = $request->validated();
-        $category = $this->service->createCategory($data);
+        $category = $this->service->createCategory(
+            CreateCategoryDTO::makeFromRequest($request)
+        );
         return new CategoryResource($category);
     }
 
@@ -36,8 +39,9 @@ class CategoryController extends Controller
 
     public function update(StoreUpdateCategoryRequest $request, string $id)
     {
-        $data = $request->validated();
-        $category = $this->service->updateCategory($id, $data);
+        $category = $this->service->updateCategory(
+            UpdateCategoryDTO::makeFromRequest($request, $id)
+        );
         return new CategoryResource($category);
     }
 
